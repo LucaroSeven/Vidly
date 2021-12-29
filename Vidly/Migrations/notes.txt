@@ -1,0 +1,18 @@
+﻿Code First
+
+//DbSet are tables
+//DbContext is the gateway to our database
+
+//Enable Migrations
+enable-migraions
+
+//Create first migration
+add-migration InitialModel
+
+//On IdentityModels.cs, we add a DbSet on AplicationDbContext
+
+//To over write
+add-migration InitialModel -force
+
+//update database
+update-database
