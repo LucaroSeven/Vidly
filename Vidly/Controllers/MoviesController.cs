@@ -63,11 +63,11 @@ namespace Vidly.Controllers
 
             return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));*/
 
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
+            //var movies = _context.Movies.Include(m => m.Genre).ToList();
 
             
 
-            return View(movies);
+            return View();
         }
 
         public ActionResult New()
