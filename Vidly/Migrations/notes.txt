@@ -16,3 +16,9 @@ add-migration InitialModel -force
 
 //update database
 update-database
+
+//// Deployment
+
+// Deploy database
+first time: update-database -script
+upgrade from migration: update-database -script -SourceMigration:[NameOfStartMigration]
