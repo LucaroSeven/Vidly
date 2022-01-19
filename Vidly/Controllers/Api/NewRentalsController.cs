@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -44,6 +45,49 @@ namespace Vidly.Controllers.Api
             }
 
             _context.SaveChanges();
+
+            return Ok();
+        }
+
+        /*[HttpGet]
+        public IHttpActionResult GetNewRentals()
+        {
+
+            var newRentalsDto = _context.Rentals.Include(r => r.Customer)
+                .Where(r => r.DateReturned == null)
+                .ToList();
+
+            return Ok(newRentalsDto);
+        }*/
+
+        [HttpGet]
+        public IHttpActionResult GetNewRentals(int customerId)
+        {
+
+            var newRentalsDto = _context.Rentals
+                .Include(r => r.Customer)
+                .Include(r => r.Movie)
+                .Where(r => r.Customer.Id == customerId)
+                .ToList();
+
+            return Ok(newRentalsDto);
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateNewRentals(int id)
+        {
+            Rental rental = _context.Rentals.Include(r => r.Movie).SingleOrDefault(m => m.Id == id);
+
+            if (rental == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            if (rental.DateReturned == null)
+            {
+                rental.DateReturned = DateTime.Now;
+                rental.Movie.NumberAvailable++;
+                _context.SaveChanges();
+            }
+
 
             return Ok();
         }

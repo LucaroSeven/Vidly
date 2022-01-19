@@ -1,0 +1,18 @@
+﻿Additional Challenges for the Vidly Application
+
+As with all developers nobody knows how to do everything and so we tend to learn out of necessity. 
+There are no solutions as I want to simulate a real-world scenario. 
+When you are at work, you won’t have me next to you nor will you have the solutions provided to you. 
+You have to use your knowledge and research to find the solution. 
+There is no perfect solution. Every solution has pros and cons. 
+So, don’t get hung up on the fact I have not provided my own solutions to these challenges. 
+If you get stuck please share your solutions on the discussion board and ask others for their input. 
+So be patient if you are having a hard time getting started on how to implement these challenges, but most of all have fun!
+
+	1. Add the ability for end users to check movies in.
+	2. Add the logic to limit how many movies a customer can have rented at one time.
+	3. Add the ability to allow end users mark customers as delinquent on payment as well as the ability to remove this flag. 
+	This could be used so that these customers cannot rent movies until they are no longer delinquent on payment.
+	4. Add the ability to allow end users to apply a discounted rate to customers.
+	5. Add the ability to allow end users to maintain both users and roles through the user interface. 
+	This probably should be limited to an Admin role.

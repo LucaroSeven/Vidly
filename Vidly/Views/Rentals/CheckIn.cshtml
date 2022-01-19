@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "CheckIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CheckIn</h2>
+
+<table id="rentals" class="table">
+    <thead class="table	table-bordered	table-hover">
+        <tr>
+            <th scope="col">Movie</th>
+            <th>Date Rented</th>
+            <th>Date Returned</th>
+            <th>Check In</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var url = window.location.href;
+            var array = url.split('/');
+            var lastsegment = array[array.length - 1];
+
+            const options = {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            };
+            const dateTimeFormat = new Intl.DateTimeFormat(navigator.language, options).format;
+            
+
+            var table = $("#rentals").DataTable({
+                ajax: {
+                    url: "/api/NewRentals?customerId=" + lastsegment,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "movie.name"
+                    },
+                    {
+                        data: "dateRented",
+                        render: function (data) {
+                            if (data == null)
+                                return '';
+                            return "<td>" + dateTimeFormat(Date.parse(data))+"</td>";
+                        }
+                    },
+                    {
+                        data: "dateReturned",
+                        render: function (data) {
+                            if (data == null)
+                                return '';
+                            return "<td>" + dateTimeFormat(Date.parse(data))+"</td>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, rental) {
+                            if (rental.dateReturned != null)
+                                return 'It\'s checked in';
+                            return "<button class='btn-link js-checkIn' data-rental-id=" + data + ">Check In</button>";
+                        }
+                    }
+                ]
+            });
+
+
+            $("#rentals").on("click", ".js-checkIn", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to check in this movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/NewRentals/" + button.attr("data-rental-id"),
+                            method: "PUT",
+                            success: function () {
+                                table.ajax.reload();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

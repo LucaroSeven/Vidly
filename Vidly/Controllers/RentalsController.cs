@@ -12,5 +12,15 @@ namespace Vidly.Controllers
         {
             return View();
         }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult CheckIn(int id)
+        {
+            return View(id);
+        }
     }
 }

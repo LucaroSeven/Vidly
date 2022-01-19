@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+<div style="margin: 15px 0px;">
+    @Html.ActionLink("NEW RENTAL", "New", "Rentals", null, new { @class = "btn btn-primary" })
+</div>
+<table id="customers" class="table">
+    <thead class="table	table-bordered	table-hover">
+        <tr>
+            <th scope="col">Customer</th>
+            <th>Check In</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-checkIn' data-customer-id=" + data + ">Check Movies In</button>";
+                        }
+                    }
+                ]
+            });
+
+
+            $("#customers").on("click", ".js-checkIn", function () {
+                var button = $(this);
+                window.location.href = "/Rentals/CheckIn/" + button.attr("data-customer-id");
+            });
+        });
+    </script>
+}
