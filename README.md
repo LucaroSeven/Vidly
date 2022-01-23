@@ -3,6 +3,8 @@ A Course ASP.NET MVC 5 Project
 
 Almost each section has a commit related to it.
 
+Also, there is commits called Extra, which are Code Challenges that I solved myseflf.
+
 - Section 1: Getting Started.
 - Section 2: ASP.NET Fundamentals.
 - Section 3: Working with data.
