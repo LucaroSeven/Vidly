@@ -298,6 +298,10 @@
     <Compile Include="Migrations\202201172343180_AddCustomerIdOnRentals.Designer.cs">
       <DependentUpon>202201172343180_AddCustomerIdOnRentals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201220033085_AddLimitOfRentedOnCustomer.cs" />
+    <Compile Include="Migrations\202201220033085_AddLimitOfRentedOnCustomer.Designer.cs">
+      <DependentUpon>202201220033085_AddLimitOfRentedOnCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -662,6 +666,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201172343180_AddCustomerIdOnRentals.resx">
       <DependentUpon>202201172343180_AddCustomerIdOnRentals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201220033085_AddLimitOfRentedOnCustomer.resx">
+      <DependentUpon>202201220033085_AddLimitOfRentedOnCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

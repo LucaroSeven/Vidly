@@ -24,5 +24,14 @@ namespace Vidly.Models
         
         [Display(Name="Membership Type")]
         public byte MembershipTypeId { get; set; }
+
+        [Required]
+        [Display(Name = "Limit Of Movies Rented")]
+        [Range(1, 20)]
+        public int LimitOfMoviesRented { get; set; }
+
+        [Required]
+        [Display(Name = "Movies Rented")]
+        public int MoviesRented { get; set; }
     }
 }

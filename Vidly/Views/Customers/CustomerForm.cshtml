@@ -24,6 +24,11 @@
         @Html.TextBoxFor(m => m.Customer.Birthday, "{0:d MMM yyy}", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Customer.Birthday)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.LimitOfMoviesRented)
+        @Html.TextBoxFor(m => m.Customer.LimitOfMoviesRented, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.LimitOfMoviesRented)
+    </div>
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(m => m.Customer.IsSuscribedToNewsLetter) Subscribed to Newsletter?
@@ -38,4 +43,4 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    }
+}

@@ -100,16 +100,24 @@ namespace Vidly.Controllers
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
+                movie.NumberAvailable = movie.NumberInStock;
                 _context.Movies.Add(movie);
             }
             else
             {
                 var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
 
+                int newNumberAvailable = movieInDb.NumberAvailable + (movie.NumberInStock - movieInDb.NumberInStock);
+
+                if(newNumberAvailable < 0)
+                    movieInDb.NumberAvailable = 0;
+                else
+                    movieInDb.NumberAvailable = newNumberAvailable;
+
+                movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.Name = movie.Name;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.GenreId = movie.GenreId;
-                movieInDb.NumberInStock = movie.NumberInStock;
             }
 
             _context.SaveChanges();

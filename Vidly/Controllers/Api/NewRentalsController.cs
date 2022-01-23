@@ -26,7 +26,12 @@ namespace Vidly.Controllers.Api
             var customer = _context.Customers.Single(c => c.Id == newRentalDto.CustomerId);
 
             var movies = _context.Movies.Where(
-                m => newRentalDto.MovieIds.Contains(m.Id)).ToList(); ;
+                m => newRentalDto.MovieIds.Contains(m.Id)).ToList();
+
+            int moviesCanRent = customer.LimitOfMoviesRented - customer.MoviesRented;
+
+            if (movies.Count > moviesCanRent)
+                return BadRequest("Limit of movies exceeded.");
 
             foreach (var movie in movies)
             {
@@ -43,6 +48,7 @@ namespace Vidly.Controllers.Api
                 _context.Rentals.Add(rental);
 
             }
+            customer.MoviesRented += movies.Count;
 
             _context.SaveChanges();
 
@@ -76,7 +82,10 @@ namespace Vidly.Controllers.Api
         [HttpPut]
         public IHttpActionResult UpdateNewRentals(int id)
         {
-            Rental rental = _context.Rentals.Include(r => r.Movie).SingleOrDefault(m => m.Id == id);
+            Rental rental = _context.Rentals
+                .Include(r => r.Movie)
+                .Include(r => r.Customer)
+                .SingleOrDefault(m => m.Id == id);
 
             if (rental == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -85,6 +94,7 @@ namespace Vidly.Controllers.Api
             {
                 rental.DateReturned = DateTime.Now;
                 rental.Movie.NumberAvailable++;
+                rental.Customer.MoviesRented--;
                 _context.SaveChanges();
             }
 

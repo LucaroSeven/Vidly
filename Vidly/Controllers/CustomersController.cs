@@ -71,6 +71,7 @@ namespace Vidly.Controllers
                 customerInDb.Name = customer.Name;
                 customerInDb.Birthday = customer.Birthday;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.LimitOfMoviesRented = customer.LimitOfMoviesRented;
                 customerInDb.IsSuscribedToNewsLetter = customer.IsSuscribedToNewsLetter;
             }
 

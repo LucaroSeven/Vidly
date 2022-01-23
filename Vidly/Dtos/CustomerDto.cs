@@ -22,5 +22,10 @@ namespace Vidly.Dtos
         public byte MembershipTypeId { get; set; }
 
         public MembershipTypeDto membershipType { get; set; }
+
+        [Range(1, 20)]
+        public int LimitOfMoviesRented { get; set; }
+
+        public int MoviesRented { get; set; }
     }
 }

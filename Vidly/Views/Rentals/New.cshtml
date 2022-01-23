@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "New Rental Form";
 }
 
@@ -18,6 +17,7 @@
             <input data-rule-validMinMovie="true" id="movie" name="movie" type="text" value="" class="form-control" />
         </div>
     </div>
+    <p id="LimitOfMovies"></p>
 
     <div class="row">
         <div class="col-md-4">
@@ -55,6 +55,7 @@
                 source: customers
             }).on("typeahead:select", function (e, customer) {
                 vm.customerId = customer.id;
+                $("#LimitOfMovies").text("Limit of movies can rent: " + (customer.limitOfMoviesRented - customer.moviesRented));
             });
 
             var movies = new Bloodhound({
