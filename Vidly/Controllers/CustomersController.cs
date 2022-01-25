@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -68,11 +69,7 @@ namespace Vidly.Controllers
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
 
-                customerInDb.Name = customer.Name;
-                customerInDb.Birthday = customer.Birthday;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.LimitOfMoviesRented = customer.LimitOfMoviesRented;
-                customerInDb.IsSuscribedToNewsLetter = customer.IsSuscribedToNewsLetter;
+                Mapper.Map(customer, customerInDb);
             }
 
             _context.SaveChanges();

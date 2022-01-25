@@ -16,6 +16,8 @@ namespace Vidly.Dtos
 
         public bool IsSuscribedToNewsLetter { get; set; }
 
+        public bool IsDelinquent { get; set; }
+
         /*[Min18YearsIfAMember]*/
         public DateTime? Birthday { get; set; }
 

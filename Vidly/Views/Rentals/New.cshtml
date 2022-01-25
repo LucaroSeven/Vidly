@@ -17,7 +17,7 @@
             <input data-rule-validMinMovie="true" id="movie" name="movie" type="text" value="" class="form-control" />
         </div>
     </div>
-    <p id="LimitOfMovies"></p>
+    <p id="Message"></p>
 
     <div class="row">
         <div class="col-md-4">
@@ -54,8 +54,14 @@
                 display: 'name',
                 source: customers
             }).on("typeahead:select", function (e, customer) {
-                vm.customerId = customer.id;
-                $("#LimitOfMovies").text("Limit of movies can rent: " + (customer.limitOfMoviesRented - customer.moviesRented));
+                if (!customer.isDelinquent) {
+                    $("#movie").prop("disabled", false);
+                    vm.customerId = customer.id;
+                    $("#Message").text("Limit of movies can rent: " + (customer.limitOfMoviesRented - customer.moviesRented));
+                } else {
+                    $("#movie").prop("disabled", true);
+                    $("#Message").text("The Customer is Delinquent.");
+                }
             });
 
             var movies = new Bloodhound({

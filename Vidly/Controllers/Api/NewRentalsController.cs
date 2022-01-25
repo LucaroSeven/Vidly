@@ -28,6 +28,9 @@ namespace Vidly.Controllers.Api
             var movies = _context.Movies.Where(
                 m => newRentalDto.MovieIds.Contains(m.Id)).ToList();
 
+            if (customer.IsDelinquent)
+                return BadRequest("The Customer is Delinquent");
+
             int moviesCanRent = customer.LimitOfMoviesRented - customer.MoviesRented;
 
             if (movies.Count > moviesCanRent)
@@ -74,6 +77,7 @@ namespace Vidly.Controllers.Api
                 .Include(r => r.Customer)
                 .Include(r => r.Movie)
                 .Where(r => r.Customer.Id == customerId)
+                .OrderByDescending(r => r.DateRented)
                 .ToList();
 
             return Ok(newRentalsDto);
